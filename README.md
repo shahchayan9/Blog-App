@@ -1,11 +1,11 @@
 
 # Blog Application
 
-This project is a simple microservices-based blog platform where users can create blog posts and comment on posts. The application is divided into two microservices:
+This project is a microservices-based blog platform where users can create blog posts and comment on posts. The application is divided into two microservices:
 - **Post Service**: Manages the creation and retrieval of blog posts.
 - **Comment Service**: Manages user comments on blog posts.
 
-Both services are containerized using Docker and use **Flask** as the backend framework and **SQLite** as the database.
+Both services are containerized using Docker, deployed on a Kubernetes cluster using **kind**, and use **Flask** as the backend framework and **SQLite** as the database.
 
 ---
 
@@ -14,6 +14,7 @@ Both services are containerized using Docker and use **Flask** as the backend fr
 - [Microservices Architecture](#microservices-architecture)
 - [Setup and Installation](#setup-and-installation)
 - [API Endpoints](#api-endpoints)
+- [Kubernetes Deployment](#kubernetes-deployment)
 - [Testing](#testing)
 - [Future Enhancements](#future-enhancements)
 
@@ -24,7 +25,7 @@ Both services are containerized using Docker and use **Flask** as the backend fr
 - **Backend**: Flask (Python)
 - **Database**: SQLite
 - **Containers**: Docker
-- **Tools**: curl (for API testing), Postman (optional)
+- **Cluster**: Kubernetes (kind)
 
 ---
 
@@ -44,7 +45,8 @@ Both services are containerized using Docker and use **Flask** as the backend fr
 
 ### Prerequisites
 
-- Docker installed on your machine.
+- Docker and kind installed on your machine.
+- Kubernetes CLI (`kubectl`) installed.
 
 ### Clone the Repository
 
@@ -68,11 +70,6 @@ cd comment-service
 docker build -t comment-service .
 docker run -d -p 5004:5004 comment-service
 ```
-
-### Accessing the Services
-
-- **Post Service**: `http://localhost:5003`
-- **Comment Service**: `http://localhost:5004`
 
 ---
 
@@ -115,6 +112,48 @@ docker run -d -p 5004:5004 comment-service
   ```bash
   curl -X DELETE http://localhost:5004/comments/1
   ```
+
+---
+
+## Kubernetes Deployment
+
+### 1. Create a Kind Cluster
+
+```bash
+kind create cluster
+```
+
+### 2. Load Docker Images into the Cluster
+
+```bash
+kind load docker-image post-service:latest
+kind load docker-image comment-service:latest
+```
+
+### 3. Apply Kubernetes YAML Files
+
+```bash
+kubectl apply -f k8s/post-service.yaml
+kubectl apply -f k8s/comment-service.yaml
+```
+
+### 4. Port Forward to Access Services
+
+#### Port Forward Post Service
+
+```bash
+kubectl port-forward service/post-service 31716:80
+```
+
+Access Post Service at: `http://localhost:31716/posts`
+
+#### Port Forward Comment Service
+
+```bash
+kubectl port-forward service/comment-service 30389:80
+```
+
+Access Comment Service at: `http://localhost:30389/comments`
 
 ---
 
