@@ -1,6 +1,12 @@
 
 # Blog Application
 
+### Screenshots
+
+The screenshots of the Kubernetes running state and the application running are included in the `screenshots` folder in the repository.
+
+---
+
 This project is a microservices-based blog platform where users can create blog posts and comment on posts. The application is divided into two microservices:
 - **Post Service**: Manages the creation and retrieval of blog posts.
 - **Comment Service**: Manages user comments on blog posts.
