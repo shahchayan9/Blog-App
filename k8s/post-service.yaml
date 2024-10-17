@@ -15,7 +15,7 @@ spec:
       containers:
       - name: post-service
         image: post-service:latest
-        imagePullPolicy: Never  # <-- Add this line
+        imagePullPolicy: Never
         ports:
         - containerPort: 5003
 ---
