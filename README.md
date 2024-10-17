@@ -184,11 +184,14 @@ You can test the application using **curl** commands or **Postman** by hitting t
 │   ├── app.py
 │   ├── post.db (generated after running the container)
 │   └── requirements.txt
-└── comment-service
-    ├── Dockerfile
-    ├── app.py
-    ├── comment.db (generated after running the container)
-    └── requirements.txt
+├── comment-service
+│   ├── Dockerfile
+│   ├── app.py
+│   ├── comment.db (generated after running the container)
+│   └── requirements.txt
+└── k8s
+    ├── post-service.yaml
+    └── comment-service.yaml
 ```
 
 ---
