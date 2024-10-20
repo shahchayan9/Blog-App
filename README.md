@@ -1,5 +1,7 @@
 
 # Blog Application
+### Documentation
+https://docs.google.com/document/d/10OW0pzIaGImjmEvKBbvwUYNOLvRpXNKRk4uNr16XPNg/edit?tab=t.0#heading=h.vyk8b0ud6lvg
 
 ### Screenshots
 
